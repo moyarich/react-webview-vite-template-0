@@ -643,6 +643,12 @@ Then add the submenu to the editor context menu and place our command inside it:
           "group": "navigation"
         }
       ],
+      "explorer/context": [
+        {
+          "submenu": "react-webview-vite.webviewMenu",
+          "group": "navigation"
+        }
+      ],
       "react-webview-vite.webviewMenu": [
         {
           "command": "react-webview-vite.openPanel",
@@ -654,7 +660,7 @@ Then add the submenu to the editor context menu and place our command inside it:
 }
 ```
 
-Now a user can right-click inside an editor and choose:
+Now a user can right-click either inside an editor or on a file in the Explorer and choose:
 
 ```text
 React Webview

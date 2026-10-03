@@ -508,6 +508,31 @@ export function postMessage(message: WebviewMessage) {
 
 This small wrapper keeps the VS Code webview API in one place.
 
+### Browser preview shim
+
+`acquireVsCodeApi()` only exists inside a real VS Code webview.
+
+To let the React app run in a normal browser during Vite development, the wrapper falls back to a small preview implementation:
+
+```ts
+const vscode =
+  typeof acquireVsCodeApi === "function"
+    ? acquireVsCodeApi()
+    : createPreviewVsCodeApi();
+```
+
+The preview shim implements:
+
+```text
+postMessage(...)
+getState()
+setState(...)
+```
+
+For the tutorial's `showMessage` action, it also dispatches a simulated `messageShown` browser event so the same React interaction can be tested without launching VS Code.
+
+The preview response is simulated browser behavior. In the real extension, messages still travel through the VS Code extension host.
+
 ---
 
 ## 12. Build the React UI

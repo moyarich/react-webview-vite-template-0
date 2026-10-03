@@ -583,7 +583,7 @@ React also listens for a message coming back from the extension and stores it in
 
 ---
 
-## 13. Register the VS Code command
+## 13. Register the VS Code command and menu
 
 Open the root:
 
@@ -591,7 +591,7 @@ Open the root:
 package.json
 ```
 
-Add:
+First declare the command:
 
 ```json
 {
@@ -612,7 +612,56 @@ The command ID is:
 react-webview-vite.openPanel
 ```
 
-We will use that exact ID in `src/extension.ts`.
+We will use that exact ID again in `src/extension.ts`.
+
+Declaring a command makes it available to VS Code, including the Command Palette. We can also surface it in the editor UI.
+
+Add a submenu:
+
+```json
+{
+  "contributes": {
+    "submenus": [
+      {
+        "id": "react-webview-vite.webviewMenu",
+        "label": "React Webview"
+      }
+    ]
+  }
+}
+```
+
+Then add the submenu to the editor context menu and place our command inside it:
+
+```json
+{
+  "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "react-webview-vite.webviewMenu",
+          "group": "navigation"
+        }
+      ],
+      "react-webview-vite.webviewMenu": [
+        {
+          "command": "react-webview-vite.openPanel",
+          "group": "navigation"
+        }
+      ]
+    }
+  }
+}
+```
+
+Now a user can right-click inside an editor and choose:
+
+```text
+React Webview
+└── Open React Webview
+```
+
+The same command is still available from the Command Palette.
 
 ---
 

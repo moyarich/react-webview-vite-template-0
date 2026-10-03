@@ -72,3 +72,46 @@ webview-ui/dist/
 ```
 
 The extension references the built browser assets through `webview.asWebviewUri(...)`.
+
+
+## Command surface
+
+The extension contributes one command:
+
+```text
+react-webview-vite.openPanel
+```
+
+It is available from the Command Palette and from an editor context-menu submenu:
+
+```text
+React Webview
+└── Open React Webview
+```
+
+The submenu is declared with `contributes.submenus` and inserted into `editor/context` through `contributes.menus`.
+
+The submenu itself then receives the command through a menu whose ID matches the submenu ID:
+
+```json
+{
+  "submenus": [
+    {
+      "id": "react-webview-vite.webviewMenu",
+      "label": "React Webview"
+    }
+  ],
+  "menus": {
+    "editor/context": [
+      {
+        "submenu": "react-webview-vite.webviewMenu"
+      }
+    ],
+    "react-webview-vite.webviewMenu": [
+      {
+        "command": "react-webview-vite.openPanel"
+      }
+    ]
+  }
+}
+```

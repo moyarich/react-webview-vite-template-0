@@ -400,11 +400,11 @@ Examples include:
 ```css
 var(--vscode-editor-background)
 var(--vscode-foreground)
-var(--vscode-descriptionForeground)
-var(--vscode-panel-border)
-var(--vscode-button-background)
-var(--vscode-button-foreground)
-var(--vscode-button-hoverBackground)
+var(--webview-description-foreground)
+var(--webview-panel-border)
+var(--webview-button-background)
+var(--webview-button-foreground)
+var(--webview-button-hover-background)
 ```
 
 We can use Tailwind for layout and spacing while using VS Code variables for colors.
@@ -430,7 +430,7 @@ export function VSCodeButton({
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      className={`rounded bg-[var(--vscode-button-background)] px-3 py-2 text-[var(--vscode-button-foreground)] hover:bg-[var(--vscode-button-hoverBackground)] ${className}`}
+      className={`rounded bg-[var(--webview-button-background)] px-3 py-2 text-[var(--webview-button-foreground)] hover:bg-[var(--webview-button-hover-background)] ${className}`}
       {...props}
     />
   );
@@ -438,7 +438,7 @@ export function VSCodeButton({
 
 export function VSCodeCard({ children }: { children: ReactNode }) {
   return (
-    <section className="max-w-xl rounded border border-[var(--vscode-panel-border)] p-5">
+    <section className="max-w-xl rounded border border-[var(--webview-panel-border)] p-5">
       {children}
     </section>
   );
@@ -450,7 +450,7 @@ These are ordinary React components.
 The VS Code integration comes from CSS variables such as:
 
 ```tsx
-bg-[var(--vscode-button-background)]
+bg-[var(--webview-button-background)]
 ```
 
 That allows the UI to follow light, dark, and custom editor themes.
@@ -577,7 +577,7 @@ export default function App() {
       <VSCodeCard>
         <h1 className="text-xl font-semibold">Hello from React</h1>
 
-        <p className="mt-2 text-[var(--vscode-descriptionForeground)]">
+        <p className="mt-2 text-[var(--webview-description-foreground)]">
           This UI is rendered by React inside a VS Code webview.
         </p>
 

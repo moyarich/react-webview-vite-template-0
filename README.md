@@ -1024,23 +1024,43 @@ That confirms both message directions work.
 
 ## 24. Development workflow
 
-Start both build watchers from the repository root:
+For day-to-day development, run one command from the repository root:
 
 ```bash
 npm run dev
 ```
 
-That runs:
+The first time it starts, `predev` runs a complete build. Then `dev` starts three long-running processes together:
 
 ```text
+extension watcher
 src/extension.ts
     ↓ Vite watch
 dist/extension.js
 
+webview watcher
 webview-ui/src/*
     ↓ Vite watch
 webview-ui/dist/assets/*
+
+VS Code
+    ↓
+Extension Development Host
 ```
+
+The VS Code window is launched with this repository as the extension under development, so you do not need to press `F5` when using `npm run dev`.
+
+Once the window opens, run **Open React Webview** from the Command Palette.
+
+The terminal stays attached while that VS Code window is open. Closing the development window stops the combined development command.
+
+If your VS Code CLI is not named `code`, set `CODE_COMMAND`:
+
+```bash
+CODE_COMMAND=code-insiders npm run dev
+```
+
+You can still use `F5` instead if you prefer VS Code's built-in debugger.
 
 ### When React changes
 

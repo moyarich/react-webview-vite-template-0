@@ -54,12 +54,11 @@
     "watch": "concurrently -k -n extension,webview \"npm run watch:extension\" \"npm run watch:webview\"",
     "watch:extension": "vite build --watch --mode development --config vite.extension.config.ts",
     "watch:webview": "npm --prefix webview-ui run build:watch",
-    "dev": "concurrently -k -n extension,webview,browser,vscode \"npm run watch:extension\" \"npm run watch:webview\" \"npm run dev:browser\" \"npm run dev:extension\"",
-    "typecheck": "tsc --noEmit && npm --prefix webview-ui run typecheck",
-    "lint": "eslint src && npm --prefix webview-ui run lint",
-    "predev": "npm run build",
+    "dev": "concurrently -k -n extension,webview,preview,vscode \"npm run watch:extension\" \"npm run watch:webview\" \"npm run dev:preview\" \"npm run dev:extension\"",
+    "dev:preview": "npm --prefix webview-ui run dev",
     "dev:extension": "node ./scripts/run-extension-dev.mjs",
-    "dev:browser": "npm --prefix webview-ui run dev"
+    "typecheck": "tsc --noEmit && npm --prefix webview-ui run typecheck",
+    "lint": "eslint src && npm --prefix webview-ui run lint"
   },
   "devDependencies": {
     "@types/node": "22.x",

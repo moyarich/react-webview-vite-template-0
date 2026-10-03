@@ -508,7 +508,7 @@ export function postMessage(message: WebviewMessage) {
 
 This small wrapper keeps the VS Code webview API in one place.
 
-### Browser preview shim
+### Preview shim
 
 `acquireVsCodeApi()` only exists inside a real VS Code webview.
 
